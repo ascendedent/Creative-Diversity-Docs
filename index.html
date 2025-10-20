@@ -169,18 +169,18 @@
                 <h2>Element Taxonomy Fields</h2>
                 
                 <div class="tier-box">
-                    <div class="tier-header">Tier 1: Core Elements (40% weight)</div>
+                    <div class="tier-header">Tier 1: Core Elements (45% weight)</div>
                     <div class="field">
                         <span class="field-name">core_types</span>
-                        <div class="field-desc">Type of core video</div>
+                        <div class="field-desc">Type of core video (e.g., Demonstration, Testimonial)</div>
                     </div>
                     <div class="field">
                         <span class="field-name">core_frameworks</span>
-                        <div class="field-desc">Framework structure used</div>
+                        <div class="field-desc">Framework structure used (e.g., Problem-Solution, AIDA)</div>
                     </div>
                     <div class="field">
                         <span class="field-name">core_avatars</span>
-                        <div class="field-desc">Avatar featured in core</div>
+                        <div class="field-desc">Avatar featured in core (e.g., Male 30s, Female 50s)</div>
                     </div>
                     <div class="field">
                         <span class="field-name">core_locations</span>
@@ -189,38 +189,22 @@
                 </div>
 
                 <div class="tier-box">
-                    <div class="tier-header">Tier 2: Secondary Elements (30% weight)</div>
-                    <div class="field">
-                        <span class="field-name">lengths</span>
-                        <div class="field-desc">Video length in seconds</div>
-                    </div>
-                    <div class="field">
-                        <span class="field-name">testings</span>
-                        <div class="field-desc">Testing designation</div>
-                    </div>
-                    <div class="field">
-                        <span class="field-name">asset_types</span>
-                        <div class="field-desc">Creative version type (e.g., New, Variation, Alternate)</div>
-                    </div>
-                </div>
-
-                <div class="tier-box">
-                    <div class="tier-header">Tier 3: Hook Elements (30% weight)</div>
+                    <div class="tier-header">Tier 2: Hook Elements (35% weight)</div>
                     <div class="field">
                         <span class="field-name">hook_angles</span>
-                        <div class="field-desc">Hook angle approach</div>
+                        <div class="field-desc">Hook angle approach (e.g., Problem-Agitate, Social Proof)</div>
                     </div>
                     <div class="field">
                         <span class="field-name">hook_types</span>
-                        <div class="field-desc">Hook format type</div>
+                        <div class="field-desc">Hook format type (e.g., Testimonial, Question)</div>
                     </div>
                     <div class="field">
                         <span class="field-name">hook_styles</span>
-                        <div class="field-desc">Hook presentation style</div>
+                        <div class="field-desc">Hook presentation style (e.g., Emotional, Logical)</div>
                     </div>
                     <div class="field">
                         <span class="field-name">hook_specifics</span>
-                        <div class="field-desc">Specific hook content theme</div>
+                        <div class="field-desc">Specific hook content theme (e.g., Fire Safety, Privacy)</div>
                     </div>
                     <div class="field">
                         <span class="field-name">hook_avatars</span>
@@ -229,6 +213,22 @@
                     <div class="field">
                         <span class="field-name">hook_locations</span>
                         <div class="field-desc">Location setting for hook</div>
+                    </div>
+                </div>
+
+                <div class="tier-box">
+                    <div class="tier-header">Tier 3: Secondary Elements (20% weight)</div>
+                    <div class="field">
+                        <span class="field-name">lengths</span>
+                        <div class="field-desc">Video length in seconds</div>
+                    </div>
+                    <div class="field">
+                        <span class="field-name">testings</span>
+                        <div class="field-desc">Testing designation (e.g., Split Test A, Control)</div>
+                    </div>
+                    <div class="field">
+                        <span class="field-name">asset_types</span>
+                        <div class="field-desc">Creative version type (e.g., New, Variation, Alternate)</div>
                     </div>
                 </div>
             </div>
@@ -248,12 +248,12 @@
                 
                 <div class="field">
                     <span class="field-name">secondary_uniqueness_score</span> <span class="field-range">(0-100)</span>
-                    <div class="field-desc">How unique this ad's Tier 2 secondary elements are. Counts how many other ads share the same 3-element secondary combination.</div>
+                    <div class="field-desc">How unique this ad's Tier 3 secondary elements are. Counts how many other ads share the same 3-element secondary combination.</div>
                 </div>
                 
                 <div class="field">
                     <span class="field-name">hook_uniqueness_score</span> <span class="field-range">(0-100)</span>
-                    <div class="field-desc">How unique this ad's Tier 3 hook elements are. Counts how many other ads share the same 6-element hook combination.</div>
+                    <div class="field-desc">How unique this ad's Tier 2 hook elements are. Counts how many other ads share the same 6-element hook combination.</div>
                 </div>
                 
                 <div class="field">
@@ -265,22 +265,22 @@
                 
                 <div class="field">
                     <span class="field-name">core_fingerprint_frequency</span>
-                    <div class="field-desc">Number of ads sharing this exact 4-element core combination</div>
+                    <div class="field-desc">Number of ads sharing this exact 4-element core combination (Tier 1)</div>
                 </div>
                 
                 <div class="field">
                     <span class="field-name">secondary_fingerprint_frequency</span>
-                    <div class="field-desc">Number of ads sharing this exact 3-element secondary combination</div>
+                    <div class="field-desc">Number of ads sharing this exact 3-element secondary combination (Tier 3)</div>
                 </div>
                 
                 <div class="field">
                     <span class="field-name">hook_fingerprint_frequency</span>
-                    <div class="field-desc">Number of ads sharing this exact 6-element hook combination</div>
+                    <div class="field-desc">Number of ads sharing this exact 6-element hook combination (Tier 2)</div>
                 </div>
                 
                 <div class="field">
                     <span class="field-name">full_fingerprint_frequency</span>
-                    <div class="field-desc">Number of ads sharing this exact 13-element full combination</div>
+                    <div class="field-desc">Number of ads sharing this exact 13-element full combination (all tiers)</div>
                 </div>
 
                 <div class="note">Lower frequency = more unique. Frequency of 1 = completely unique.</div>
@@ -298,17 +298,17 @@
                 
                 <div class="field">
                     <span class="field-name">core_tier1_diversity</span> <span class="field-range">(0-100)</span>
-                    <div class="field-desc">Diversity score for Tier 1 elements across all core versions</div>
+                    <div class="field-desc">Diversity score for Tier 1 core elements across all core versions</div>
                 </div>
                 
                 <div class="field">
                     <span class="field-name">core_tier2_diversity</span> <span class="field-range">(0-100)</span>
-                    <div class="field-desc">Diversity score for Tier 2 elements across all core versions</div>
+                    <div class="field-desc">Diversity score for Tier 2 hook elements across all core versions</div>
                 </div>
                 
                 <div class="field">
                     <span class="field-name">core_tier3_diversity</span> <span class="field-range">(0-100)</span>
-                    <div class="field-desc">Diversity score for Tier 3 elements across all core versions</div>
+                    <div class="field-desc">Diversity score for Tier 3 secondary elements across all core versions</div>
                 </div>
                 
                 <div class="field">
@@ -334,17 +334,17 @@
                 
                 <div class="field">
                     <span class="field-name">hook_tier1_diversity</span> <span class="field-range">(0-100)</span>
-                    <div class="field-desc">Diversity score for Tier 1 elements across all hook versions</div>
+                    <div class="field-desc">Diversity score for Tier 1 core elements across all hook versions</div>
                 </div>
                 
                 <div class="field">
                     <span class="field-name">hook_tier2_diversity</span> <span class="field-range">(0-100)</span>
-                    <div class="field-desc">Diversity score for Tier 2 elements across all hook versions</div>
+                    <div class="field-desc">Diversity score for Tier 2 hook elements across all hook versions</div>
                 </div>
                 
                 <div class="field">
                     <span class="field-name">hook_tier3_diversity</span> <span class="field-range">(0-100)</span>
-                    <div class="field-desc">Diversity score for Tier 3 elements across all hook versions</div>
+                    <div class="field-desc">Diversity score for Tier 3 secondary elements across all hook versions</div>
                 </div>
                 
                 <div class="field">
