@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Element Diversity - Field Legend</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.4;
+            margin: 0;
+            padding: 15px;
+            background: #f5f5f5;
+            color: #333;
+            font-size: 13px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #1a1a1a;
+            border-bottom: 3px solid #ff6b35;
+            padding-bottom: 8px;
+            margin: 0 0 15px 0;
+            font-size: 1.4em;
+        }
+        h2 {
+            color: #2c3e50;
+            margin: 15px 0 8px 0;
+            font-size: 1.1em;
+            border-left: 3px solid #ff6b35;
+            padding-left: 8px;
+        }
+        h3 {
+            color: #34495e;
+            margin: 12px 0 6px 0;
+            font-size: 1em;
+        }
+        .field {
+            margin-bottom: 6px;
+            padding: 6px 8px;
+            background: #f8f9fa;
+            border-radius: 3px;
+            border-left: 2px solid #3498db;
+        }
+        .field-name {
+            font-weight: 700;
+            color: #2980b9;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+        }
+        .field-range {
+            color: #7f8c8d;
+            font-size: 10px;
+            font-style: italic;
+        }
+        .field-desc {
+            color: #555;
+            margin-top: 2px;
+            font-size: 11px;
+        }
+        .tier-box {
+            background: #ecf0f1;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .tier-header {
+            font-weight: 700;
+            color: #e74c3c;
+            margin-bottom: 6px;
+            font-size: 0.95em;
+        }
+        .note {
+            background: #fff3cd;
+            border-left: 3px solid #ffc107;
+            padding: 8px;
+            margin: 10px 0;
+            font-style: italic;
+            color: #856404;
+            font-size: 11px;
+        }
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            width: 100%;
+        }
+        .section {
+            min-width: 0;
+            overflow-wrap: break-word;
+        }
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .status-item {
+            background: #e8f4f8;
+            padding: 8px;
+            border-radius: 3px;
+            border-left: 2px solid #3498db;
+            font-size: 11px;
+        }
+        .status-label {
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        .usage-box {
+            background: #e8f5e9;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+        .usage-item {
+            margin-bottom: 6px;
+            padding-left: 15px;
+            position: relative;
+            font-size: 11px;
+        }
+        .usage-item:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #4caf50;
+            font-weight: bold;
+        }
+        .score-interpretation {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .score-box {
+            padding: 10px;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 11px;
+        }
+        .excellent { background: #d4edda; border: 2px solid #28a745; color: #155724; }
+        .good { background: #d1ecf1; border: 2px solid #17a2b8; color: #0c5460; }
+        .moderate { background: #fff3cd; border: 2px solid #ffc107; color: #856404; }
+        .poor { background: #f8d7da; border: 2px solid #dc3545; color: #721c24; }
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        ul li:before {
+            content: "•";
+            color: #ff6b35;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Creative Element Diversity - Field Legend</h1>
+
+        <div class="main-grid">
+            <div class="section">
+                <h2>Element Taxonomy Fields</h2>
+                
+                <div class="tier-box">
+                    <div class="tier-header">Tier 1: Core Elements (40% weight)</div>
+                    <div class="field">
+                        <span class="field-name">core_types</span>
+                        <div class="field-desc">Type of core video (e.g., Demonstration, Testimonial)</div>
+                    </div>
+                    <div class="field">
+                        <span class="field-name">core_frameworks</span>
+                        <div class="field-desc">Framework structure used (e.g., Problem-Solution, AIDA)</div>
+                    </div>
+                    <div class="field">
+                        <span class="field-name">core_avatars</span>
+                        <div class="field-desc">Avatar featured in core (e.g., Male 30s, Female 50s)</div>
+                    </div>
+                    <div class="field">
+                        <span class="field-name">core_locations</span>
+                        <div class="field-desc">Location setting for core (e.g., Kitchen, Living Room)</div>
+                    </div>
+                </div>
+
+                <div class="tier-box">
+                    <div class="tier-header">Tier 2: Secondary Elements (30% weight)</div>
+                    <div class="field">
+                        <span class="field-name">lengths</span>
+                        <div class="field-desc">Video length in seconds</div>
+                    </div>
+                    <div class="field">
+                        <span class="field-name">testings</span>
+                        <div class="field-desc">Testing designation (e.g., Split Test A, Control)</div>
+                    </div>
+                    <div class="field">
+                        <span class="field-name">asset_types</span>
+                        <div class="field-desc">Creative version type (e.g., New, Variation, Alternate)</div>
+                    </div>
+                </div>
+
+                <div class="tier-box">
+                    <div class="tier-header">Tier 3: Hook Elements (30% weight)</div>
+                    <div class="field">
+                        <span class="field-name">hook_angles</span>
+                        <div class="field-desc">Hook angle approach (e.g., Problem-Agitate, Social Proof)</div>
+                    </div>
+                    <div class="field">
+                        <span class="field-name">hook_types</span>
+                        <div class="field-desc">Hook format type (e.g., Testimonial, Question)</div>
+                    </div>
+                    <div class="field">
+                        <span class="field-name">hook_styles</span>
+                        <div class="field-desc">Hook presentation style (e.g., Emotional, Logical)</div>
+                    </div>
+                    <div class="field">
+                        <span class="field-name">hook_specifics</span>
+                        <div class="field-desc">Specific hook content theme (e.g., Fire Safety, Privacy)</div>
+                    </div>
+                    <div class="field">
+                        <span class="field-name">hook_avatars</span>
+                        <div class="field-desc">Avatar featured in hook</div>
+                    </div>
+                    <div class="field">
+                        <span class="field-name">hook_locations</span>
+                        <div class="field-desc">Location setting for hook</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Creative-Level Diversity Scores</h2>
+                
+                <div class="field">
+                    <span class="field-name">creative_diversity_health</span> <span class="field-range">(0-100)</span>
+                    <div class="field-desc">Overall diversity health score for this specific ad. Higher = more unique element combination within the product portfolio.</div>
+                </div>
+                
+                <div class="field">
+                    <span class="field-name">core_uniqueness_score</span> <span class="field-range">(0-100)</span>
+                    <div class="field-desc">How unique this ad's Tier 1 core elements are. Counts how many other ads share the same 4-element core combination.</div>
+                </div>
+                
+                <div class="field">
+                    <span class="field-name">secondary_uniqueness_score</span> <span class="field-range">(0-100)</span>
+                    <div class="field-desc">How unique this ad's Tier 2 secondary elements are. Counts how many other ads share the same 3-element secondary combination.</div>
+                </div>
+                
+                <div class="field">
+                    <span class="field-name">hook_uniqueness_score</span> <span class="field-range">(0-100)</span>
+                    <div class="field-desc">How unique this ad's Tier 3 hook elements are. Counts how many other ads share the same 6-element hook combination.</div>
+                </div>
+                
+                <div class="field">
+                    <span class="field-name">full_uniqueness_score</span> <span class="field-range">(0-100)</span>
+                    <div class="field-desc">How unique this ad is across ALL 13 elements combined.</div>
+                </div>
+
+                <h2>Frequency Counts (Overlap Indicators)</h2>
+                
+                <div class="field">
+                    <span class="field-name">core_fingerprint_frequency</span>
+                    <div class="field-desc">Number of ads sharing this exact 4-element core combination</div>
+                </div>
+                
+                <div class="field">
+                    <span class="field-name">secondary_fingerprint_frequency</span>
+                    <div class="field-desc">Number of ads sharing this exact 3-element secondary combination</div>
+                </div>
+                
+                <div class="field">
+                    <span class="field-name">hook_fingerprint_frequency</span>
+                    <div class="field-desc">Number of ads sharing this exact 6-element hook combination</div>
+                </div>
+                
+                <div class="field">
+                    <span class="field-name">full_fingerprint_frequency</span>
+                    <div class="field-desc">Number of ads sharing this exact 13-element full combination</div>
+                </div>
+
+                <div class="note">Lower frequency = more unique. Frequency of 1 = completely unique.</div>
+            </div>
+        </div>
+
+        <div class="main-grid">
+            <div class="section">
+                <h2>Core-Level Aggregate Scores</h2>
+                
+                <div class="field">
+                    <span class="field-name">total_core_versions</span>
+                    <div class="field-desc">Total number of versions for this base core number</div>
+                </div>
+                
+                <div class="field">
+                    <span class="field-name">core_tier1_diversity</span> <span class="field-range">(0-100)</span>
+                    <div class="field-desc">Diversity score for Tier 1 elements across all core versions</div>
+                </div>
+                
+                <div class="field">
+                    <span class="field-name">core_tier2_diversity</span> <span class="field-range">(0-100)</span>
+                    <div class="field-desc">Diversity score for Tier 2 elements across all core versions</div>
+                </div>
+                
+                <div class="field">
+                    <span class="field-name">core_tier3_diversity</span> <span class="field-range">(0-100)</span>
+                    <div class="field-desc">Diversity score for Tier 3 elements across all core versions</div>
+                </div>
+                
+                <div class="field">
+                    <span class="field-name">core_overall_diversity_health</span> <span class="field-range">(0-100)</span>
+                    <div class="field-desc">Weighted composite diversity health for this entire core</div>
+                </div>
+                
+                <div class="field">
+                    <span class="field-name">core_combination_variety_pct</span> <span class="field-range">(0-100%)</span>
+                    <div class="field-desc">Percentage of unique element combinations vs total versions</div>
+                </div>
+
+                <div class="note">Example: If core 2455 has 10 versions but only 4 unique combinations, variety = 40%</div>
+            </div>
+
+            <div class="section">
+                <h2>Hook-Level Aggregate Scores</h2>
+                
+                <div class="field">
+                    <span class="field-name">total_hook_versions</span>
+                    <div class="field-desc">Total number of versions for this base hook number</div>
+                </div>
+                
+                <div class="field">
+                    <span class="field-name">hook_tier1_diversity</span> <span class="field-range">(0-100)</span>
+                    <div class="field-desc">Diversity score for Tier 1 elements across all hook versions</div>
+                </div>
+                
+                <div class="field">
+                    <span class="field-name">hook_tier2_diversity</span> <span class="field-range">(0-100)</span>
+                    <div class="field-desc">Diversity score for Tier 2 elements across all hook versions</div>
+                </div>
+                
+                <div class="field">
+                    <span class="field-name">hook_tier3_diversity</span> <span class="field-range">(0-100)</span>
+                    <div class="field-desc">Diversity score for Tier 3 elements across all hook versions</div>
+                </div>
+                
+                <div class="field">
+                    <span class="field-name">hook_overall_diversity_health</span> <span class="field-range">(0-100)</span>
+                    <div class="field-desc">Weighted composite diversity health for this entire hook</div>
+                </div>
+                
+                <div class="field">
+                    <span class="field-name">hook_combination_variety_pct</span> <span class="field-range">(0-100%)</span>
+                    <div class="field-desc">Percentage of unique element combinations vs total versions</div>
+                </div>
+            </div>
+        </div>
+
+        <h2>Status Flags</h2>
+        
+        <h3>similarity_status - Categorical flag for overlap risk</h3>
+        <div class="status-grid">
+            <div class="status-item">
+                <div class="status-label">UNIQUE</div>
+                Only 1 ad with this combination
+            </div>
+            <div class="status-item">
+                <div class="status-label">LOW_OVERLAP</div>
+                2-3 ads share this combination
+            </div>
+            <div class="status-item">
+                <div class="status-label">MODERATE_OVERLAP</div>
+                4-5 ads share this combination
+            </div>
+            <div class="status-item">
+                <div class="status-label">HIGH_OVERLAP</div>
+                6+ ads share this combination
+            </div>
+        </div>
+
+        <h3>diversity_rating - Grade based on creative diversity health</h3>
+        <div class="status-grid">
+            <div class="status-item">
+                <div class="status-label">EXCELLENT</div>
+                Score 80-100
+            </div>
+            <div class="status-item">
+                <div class="status-label">GOOD</div>
+                Score 60-79
+            </div>
+            <div class="status-item">
+                <div class="status-label">MODERATE</div>
+                Score 40-59
+            </div>
+            <div class="status-item">
+                <div class="status-label">POOR</div>
+                Score 0-39
+            </div>
+        </div>
+
+        <div class="main-grid">
+            <div class="section">
+                <h2>Creative-Level Performance Metrics</h2>
+                
+                <div class="field">
+                    <span class="field-name">spend</span> | 
+                    <span class="field-name">revenue</span> | 
+                    <span class="field-name">orders</span> | 
+                    <span class="field-name">impressions</span> | 
+                    <span class="field-name">clicks</span>
+                    <div class="field-desc">Raw performance metrics for the individual ad</div>
+                </div>
+                
+                <div class="field">
+                    <span class="field-name">roas</span>
+                    <div class="field-desc">Return on ad spend (revenue ÷ spend)</div>
+                </div>
+                
+                <div class="field">
+                    <span class="field-name">cpc</span>
+                    <div class="field-desc">Cost per click (spend ÷ clicks)</div>
+                </div>
+                
+                <div class="field">
+                    <span class="field-name">cpa</span>
+                    <div class="field-desc">Cost per acquisition (spend ÷ orders)</div>
+                </div>
+                
+                <div class="field">
+                    <span class="field-name">ctr</span>
+                    <div class="field-desc">Click-through rate (clicks ÷ impressions)</div>
+                </div>
+                
+                <div class="field">
+                    <span class="field-name">cvr</span>
+                    <div class="field-desc">Conversion rate (orders ÷ clicks)</div>
+                </div>
+                
+                <div class="field">
+                    <span class="field-name">aov</span>
+                    <div class="field-desc">Average order value (revenue ÷ orders)</div>
+                </div>
+                
+                <div class="field">
+                    <span class="field-name">cpm</span>
+                    <div class="field-desc">Cost per thousand impressions</div>
+                </div>
+
+                <h2>Core-Level Performance Metrics</h2>
+                <p style="margin: 5px 0; font-size: 11px;"><em>Aggregate performance across all versions of the base core:</em></p>
+                
+                <div class="field">
+                    <span class="field-name">core_roas</span> | 
+                    <span class="field-name">core_cpc</span> | 
+                    <span class="field-name">core_cpa</span> | 
+                    <span class="field-name">core_ctr</span> | 
+                    <span class="field-name">core_cvr</span> | 
+                    <span class="field-name">core_aov</span> | 
+                    <span class="field-name">core_cpm</span>
+                    <div class="field-desc">Performance metrics aggregated for all versions of this core number</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Hook-Level Performance Metrics</h2>
+                <p style="margin: 5px 0; font-size: 11px;"><em>Aggregate performance across all versions of the base hook:</em></p>
+                
+                <div class="field">
+                    <span class="field-name">hook_roas</span> | 
+                    <span class="field-name">hook_cpc</span> | 
+                    <span class="field-name">hook_cpa</span> | 
+                    <span class="field-name">hook_ctr</span> | 
+                    <span class="field-name">hook_cvr</span> | 
+                    <span class="field-name">hook_aov</span> | 
+                    <span class="field-name">hook_cpm</span>
+                    <div class="field-desc">Performance metrics aggregated for all versions of this hook number</div>
+                </div>
+            </div>
+        </div>
+
+        <h2>How to Use This Data</h2>
+        
+        <div class="main-grid">
+            <div class="section">
+                <div class="usage-box">
+                    <h3 style="margin-top: 0;">Filter by Diversity Health</h3>
+                    <div class="usage-item">Find high-performing elements with good diversity (creative_diversity_health > 60)</div>
+                    <div class="usage-item">Identify over-saturated combinations (full_fingerprint_frequency > 5)</div>
+
+                    <h3>Analyze Element Performance</h3>
+                    <div class="usage-item">Compare performance metrics across different element values</div>
+                    <div class="usage-item">Identify which core types, hook angles, etc. drive best results</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="usage-box">
+                    <h3 style="margin-top: 0;">Monitor Portfolio Balance</h3>
+                    <div class="usage-item">Track core_overall_diversity_health to ensure each core has sufficient variety</div>
+                    <div class="usage-item">Use combination_variety_pct to detect duplicate creative patterns</div>
+
+                    <h3>Optimize Creative Production</h3>
+                    <div class="usage-item">Focus on elements with high uniqueness scores and strong performance</div>
+                    <div class="usage-item">Avoid creating more ads with HIGH_OVERLAP status unless performance justifies it</div>
+                </div>
+            </div>
+        </div>
+
+        <h2>Interpreting Diversity Scores</h2>
+        
+        <div class="score-interpretation">
+            <div class="score-box excellent">
+                <div>80-100</div>
+                <div style="font-size: 10px; margin-top: 3px;">Excellent diversity<br>Highly unique</div>
+            </div>
+            <div class="score-box good">
+                <div>60-79</div>
+                <div style="font-size: 10px; margin-top: 3px;">Good diversity<br>Acceptable overlap</div>
+            </div>
+            <div class="score-box moderate">
+                <div>40-59</div>
+                <div style="font-size: 10px; margin-top: 3px;">Moderate diversity<br>Concentration risk</div>
+            </div>
+            <div class="score-box poor">
+                <div>0-39</div>
+                <div style="font-size: 10px; margin-top: 3px;">Poor diversity<br>Too many similar</div>
+            </div>
+        </div>
+
+        <div class="note">
+            Lower diversity doesn't mean poor performance, but it increases Andromeda penalty risk due to creative fatigue and algorithmic pattern recognition.
+        </div>
+    </div>
+</body>
+</html>
