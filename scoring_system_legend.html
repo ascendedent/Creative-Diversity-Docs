@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scoring System & Action Flags - Legend</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.4;
+            margin: 0;
+            padding: 15px;
+            background: #f5f5f5;
+            color: #333;
+            font-size: 13px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #1a1a1a;
+            border-bottom: 3px solid #ff6b35;
+            padding-bottom: 8px;
+            margin: 0 0 15px 0;
+            font-size: 1.4em;
+        }
+        h2 {
+            color: #2c3e50;
+            margin: 15px 0 8px 0;
+            font-size: 1.1em;
+            border-left: 3px solid #ff6b35;
+            padding-left: 8px;
+        }
+        h3 {
+            color: #34495e;
+            margin: 12px 0 6px 0;
+            font-size: 1em;
+        }
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            width: 100%;
+        }
+        .section {
+            min-width: 0;
+            overflow-wrap: break-word;
+        }
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 4px;
+            color: #856404;
+        }
+        .success-box {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 4px;
+            color: #155724;
+        }
+        .formula-box {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+        }
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .action-card {
+            padding: 12px;
+            border-radius: 4px;
+            border: 2px solid;
+        }
+        .action-critical {
+            background: #fee;
+            border-color: #dc3545;
+        }
+        .action-important {
+            background: #fff3cd;
+            border-color: #ffc107;
+        }
+        .action-opportunity {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+        .action-monitor {
+            background: #e7f3ff;
+            border-color: #0d6efd;
+        }
+        .action-title {
+            font-weight: 700;
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+        .action-desc {
+            font-size: 11px;
+            margin-bottom: 6px;
+        }
+        .action-trigger {
+            font-size: 10px;
+            font-style: italic;
+            color: #666;
+        }
+        .priority-scale {
+            display: flex;
+            height: 40px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 10px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .priority-segment {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 11px;
+        }
+        .priority-critical { background: #dc3545; }
+        .priority-high { background: #fd7e14; }
+        .priority-medium { background: #ffc107; color: #333; }
+        .priority-low { background: #28a745; }
+        .example-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            font-size: 11px;
+        }
+        .example-table th {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 6px;
+            text-align: left;
+            font-weight: 700;
+        }
+        .example-table td {
+            border: 1px solid #dee2e6;
+            padding: 6px;
+        }
+        .bucket-example {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border-left: 3px solid #6c757d;
+        }
+        .score-component {
+            display: inline-block;
+            padding: 4px 8px;
+            margin: 2px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .comp-log { background: #cfe2ff; border: 1px solid #084298; }
+        .comp-spend { background: #f8d7da; border: 1px solid #842029; }
+        .comp-blend { background: #d1e7dd; border: 1px solid #0a3622; }
+        ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 8px 0;
+        }
+        ul li {
+            margin-bottom: 4px;
+            padding-left: 15px;
+            position: relative;
+            font-size: 11px;
+        }
+        ul li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #ff6b35;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 Scoring System & Action Flags - Legend</h1>
+
+        <div class="info-box">
+            <strong>What Changed:</strong> The scoring system now uses a <strong>guardrailed blend</strong> that combines log-based uniqueness (frequency) with delivery-weighted uniqueness (spend share) to provide more accurate diversity health scores that reflect both creative variety AND actual market exposure.
+        </div>
+
+        <h2>🎯 How Uniqueness Scores Are Calculated</h2>
+
+        <div class="main-grid">
+            <div class="section">
+                <h3>Component 1: Log-Based Uniqueness</h3>
+                <div class="formula-box">
+                    score = 100 / (1 + ln(1 + bucket_size))
+                </div>
+                <div class="success-box">
+                    <strong>What it measures:</strong> How many ads share identical element combinations<br>
+                    <strong>When used:</strong> Always (provides baseline)<br>
+                    <strong>Range:</strong> 0-100 (higher = fewer duplicates)
+                </div>
+                <div class="bucket-example">
+                    <strong>Example:</strong><br>
+                    • 1 ad in bucket → 100.0 score<br>
+                    • 2 ads in bucket → 59.1 score<br>
+                    • 5 ads in bucket → 35.7 score<br>
+                    • 10 ads in bucket → 27.6 score
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Component 2: Spend-Share Uniqueness (Winsorized)</h3>
+                <div class="formula-box">
+                    score = (ad_spend / bucket_total_spend) × 100
+                    capped between 1.0% and 99.0%
+                </div>
+                <div class="warning-box">
+                    <strong>What it measures:</strong> What % of delivery this ad got within its bucket<br>
+                    <strong>When used:</strong> Only for ads with ≥$300 spend AND ≥1000 impressions<br>
+                    <strong>Range:</strong> 1.0%-99.0% (winsorized to prevent extremes)
+                </div>
+                <div class="bucket-example">
+                    <strong>Example Bucket (3 ads, $1000 total):</strong><br>
+                    • Ad A: $700 spend → 70.0% score<br>
+                    • Ad B: $200 spend → 20.0% score<br>
+                    • Ad C: $100 spend → 10.0% score
+                </div>
+            </div>
+        </div>
+
+        <h2>🔀 The Guardrailed Blend</h2>
+
+        <div class="info-box">
+            <strong>Final Score Formula:</strong><br>
+            <div class="formula-box" style="margin-top: 8px;">
+                IF spend < $300 OR impressions < 1000:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;final_score = log_score (100% weight)<br>
+                ELSE:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;final_score = (spend_score × 70%) + (log_score × 30%)
+            </div>
+        </div>
+
+        <h3>Why This Matters</h3>
+        <div class="main-grid">
+            <div class="section">
+                <div class="success-box">
+                    <strong>✅ Prevents Low-Spend Bias</strong><br>
+                    <ul>
+                        <li>Ads with minimal delivery can't claim "uniqueness" just by spending $50</li>
+                        <li>Requires $300+ spend & 1000+ impressions to use spend-share component</li>
+                        <li>Below thresholds = log-only scoring (frequency-based)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="section">
+                <div class="warning-box">
+                    <strong>⚠️ Captures Delivery Dominance</strong><br>
+                    <ul>
+                        <li>If 1 ad gets 80% of bucket spend, it should score high (high market exposure)</li>
+                        <li>If spend is evenly split, all ads score moderate (balanced exposure)</li>
+                        <li>Prevents false "LOW_OVERLAP" when reality is 1 ad dominates</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <h2>📦 Understanding "Buckets"</h2>
+
+        <div class="bucket-example">
+            <strong>A "bucket" = All ads that share the same element combination</strong>
+        </div>
+
+        <table class="example-table">
+            <thead>
+                <tr>
+                    <th>Bucket Type</th>
+                    <th>Elements Included</th>
+                    <th>Field Name</th>
+                    <th>Example</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Tier 1 Bucket</td>
+                    <td>4 Core Elements</td>
+                    <td>core_fingerprint</td>
+                    <td>Authority + Deal Push + Chris Judd + Outdoors</td>
+                </tr>
+                <tr>
+                    <td>Tier 2 Bucket</td>
+                    <td>6 Hook Elements</td>
+                    <td>hook_fingerprint</td>
+                    <td>Product Demo + Hook Stack + ProCam + None + Stacked + No Hook</td>
+                </tr>
+                <tr>
+                    <td>Tier 3 Bucket</td>
+                    <td>3 Secondary Elements</td>
+                    <td>secondary_fingerprint</td>
+                    <td>60sec + Test + New</td>
+                </tr>
+                <tr>
+                    <td>Full Bucket</td>
+                    <td>All 13 Elements</td>
+                    <td>full_fingerprint</td>
+                    <td>Complete combination of all taxonomy fields</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="warning-box">
+            <strong>CRITICAL:</strong> "Tier 1 Bucket Spend %" does NOT mean "% of Core 1060's spend" — it means "% of spend within the specific 4-element Core combination bucket this ad belongs to"
+        </div>
+
+        <h2>🎬 Action Priority System</h2>
+
+        <div class="info-box">
+            <strong>action_priority</strong> (0-100) is calculated based on:<br>
+            <ul>
+                <li>40% weight: How many duplicates exist (full_fingerprint_frequency ≥ 5)</li>
+                <li>40% weight: How much spend this ad dominates (≥30% of bucket spend)</li>
+                <li>20% weight: Poor tier diversity (core OR hook diversity < 60)</li>
+            </ul>
+        </div>
+
+        <div class="priority-scale">
+            <div class="priority-segment priority-critical">80-100<br>CRITICAL</div>
+            <div class="priority-segment priority-high">60-79<br>HIGH</div>
+            <div class="priority-segment priority-medium">40-59<br>MEDIUM</div>
+            <div class="priority-segment priority-low">0-39<br>LOW</div>
+        </div>
+
+        <h2>🚨 Action Flags Explained</h2>
+
+        <div class="action-grid">
+            <div class="action-card action-critical">
+                <div class="action-title">COMMISSION_NEW_HOOK_HIGH_SPEND</div>
+                <div class="action-desc">Create brand new hook with different angles/types/styles</div>
+                <div class="action-trigger"><strong>Trigger:</strong> 5+ duplicates AND dominating 30%+ of bucket spend</div>
+            </div>
+
+            <div class="action-card action-critical">
+                <div class="action-title">VARY_CORE_FIRST</div>
+                <div class="action-desc">Prioritize varying core elements (types/frameworks/avatars/locations)</div>
+                <div class="action-trigger"><strong>Trigger:</strong> Core tier diversity < 60</div>
+            </div>
+
+            <div class="action-card action-important">
+                <div class="action-title">VARY_HOOKS_FIRST</div>
+                <div class="action-desc">Prioritize varying hook elements (angles/types/styles/etc)</div>
+                <div class="action-trigger"><strong>Trigger:</strong> Hook tier diversity < 60 (but core is healthy)</div>
+            </div>
+
+            <div class="action-card action-important">
+                <div class="action-title">DISTRIBUTE_BRIEFS</div>
+                <div class="action-desc">Assign this creative combo to different editors</div>
+                <div class="action-trigger"><strong>Trigger:</strong> Single editor has 70%+ of bucket spend</div>
+            </div>
+
+            <div class="action-card action-opportunity">
+                <div class="action-title">SCALE_PROMISING_UNIQUE</div>
+                <div class="action-desc">Increase budget on this unique, underdelivered creative</div>
+                <div class="action-trigger"><strong>Trigger:</strong> Unique fingerprint with <$300 spend</div>
+            </div>
+
+            <div class="action-card action-opportunity">
+                <div class="action-title">DUPLICATE_WINNER_WITH_VARIATIONS</div>
+                <div class="action-desc">Create variations of this high-ROAS creative with small changes</div>
+                <div class="action-trigger"><strong>Trigger:</strong> ROAS ≥ 2.0 AND low/unique overlap</div>
+            </div>
+
+            <div class="action-card action-monitor">
+                <div class="action-title">MONITOR</div>
+                <div class="action-desc">No immediate action needed; continue monitoring</div>
+                <div class="action-trigger"><strong>Trigger:</strong> Healthy diversity metrics across all dimensions</div>
+            </div>
+        </div>
+
+        <h2>📊 New Dashboard Metrics Explained</h2>
+
+        <div class="main-grid">
+            <div class="section">
+                <h3>Diagnostic Scores</h3>
+                <table class="example-table">
+                    <tr>
+                        <th>Field</th>
+                        <th>What It Shows</th>
+                    </tr>
+                    <tr>
+                        <td>core_uniqueness_log_score</td>
+                        <td>Frequency-based score (0-100)</td>
+                    </tr>
+                    <tr>
+                        <td>Tier 1 Bucket Spend %</td>
+                        <td>Spend % within core bucket (1-99%)</td>
+                    </tr>
+                    <tr>
+                        <td>core_uniqueness_score</td>
+                        <td>Final blended score (combines above)</td>
+                    </tr>
+                </table>
+
+                <div class="info-box" style="margin-top: 10px;">
+                    <strong>Use Case:</strong> Compare log vs spend components to understand WHY a score is what it is
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Spend Concentration Metrics</h3>
+                <table class="example-table">
+                    <tr>
+                        <th>Field</th>
+                        <th>What It Shows</th>
+                    </tr>
+                    <tr>
+                        <td>core_fp_spend</td>
+                        <td>Total $ in this core bucket</td>
+                    </tr>
+                    <tr>
+                        <td>editor_fp_spend</td>
+                        <td>This editor's $ in this full bucket</td>
+                    </tr>
+                    <tr>
+                        <td>editor_share_in_fp</td>
+                        <td>Editor's % of full bucket (0-100%)</td>
+                    </tr>
+                </table>
+
+                <div class="warning-box" style="margin-top: 10px;">
+                    <strong>Watch For:</strong> editor_share_in_fp ≥ 70% = concentration risk
+                </div>
+            </div>
+        </div>
+
+        <h2>🎓 Practical Examples</h2>
+
+        <h3>Example 1: High-Spend Duplicate</h3>
+        <div class="bucket-example">
+            <strong>Scenario:</strong> Core 1060 has 6 ads with identical Tier 1 elements. Ad_A spent $2000, others spent $200 each.<br><br>
+            
+            <strong>Ad_A Scores:</strong><br>
+            <span class="score-component comp-log">Log Score: 35.7</span> (6 ads in bucket)<br>
+            <span class="score-component comp-spend">Spend Score: 66.7%</span> ($2000 / $3000 total)<br>
+            <span class="score-component comp-blend">Final Score: (66.7 × 0.7) + (35.7 × 0.3) = 57.4</span><br><br>
+            
+            <strong>Action Flag:</strong> COMMISSION_NEW_HOOK_HIGH_SPEND<br>
+            <strong>Action Priority:</strong> 80 (CRITICAL)<br>
+            <strong>Why:</strong> High overlap (6 duplicates) + spend dominance (66%) = immediate action needed
+        </div>
+
+        <h3>Example 2: Balanced Spend Across Duplicates</h3>
+        <div class="bucket-example">
+            <strong>Scenario:</strong> Hook 2262 has 3 ads with identical Tier 2 elements. Each spent $500.<br><br>
+            
+            <strong>Each Ad's Scores:</strong><br>
+            <span class="score-component comp-log">Log Score: 59.1</span> (3 ads in bucket)<br>
+            <span class="score-component comp-spend">Spend Score: 33.3%</span> ($500 / $1500 total)<br>
+            <span class="score-component comp-blend">Final Score: (33.3 × 0.7) + (59.1 × 0.3) = 41.0</span><br><br>
+            
+            <strong>Action Flag:</strong> VARY_HOOKS_FIRST or MONITOR<br>
+            <strong>Action Priority:</strong> 30 (LOW)<br>
+            <strong>Why:</strong> Moderate overlap but balanced spend = lower urgency
+        </div>
+
+        <h3>Example 3: Low-Spend Unique</h3>
+        <div class="bucket-example">
+            <strong>Scenario:</strong> New test ad with unique elements, only spent $150.<br><br>
+            
+            <strong>Ad Scores:</strong><br>
+            <span class="score-component comp-log">Log Score: 100.0</span> (1 ad in bucket = unique)<br>
+            <span class="score-component comp-spend">Spend Score: N/A</span> (below $300 threshold)<br>
+            <span class="score-component comp-blend">Final Score: 100.0</span> (log-only)<br><br>
+            
+            <strong>Action Flag:</strong> SCALE_PROMISING_UNIQUE (if ROAS > 0) or MONITOR<br>
+            <strong>Action Priority:</strong> 20 (LOW)<br>
+            <strong>Why:</strong> Unique but unproven → need more data before major action
+        </div>
+
+        <h2>✅ How to Use This in Looker</h2>
+
+        <div class="main-grid">
+            <div class="section">
+                <div class="success-box">
+                    <h3 style="margin-top: 0;">1. Identify High-Priority Actions</h3>
+                    <ul>
+                        <li>Filter: action_priority ≥ 60</li>
+                        <li>Sort by: action_priority DESC</li>
+                        <li>Group by: next_action_flag</li>
+                    </ul>
+                </div>
+
+                <div class="success-box">
+                    <h3 style="margin-top: 0;">2. Diagnose WHY Scores Are Low</h3>
+                    <ul>
+                        <li>Compare: log_score vs spend_score vs final_score</li>
+                        <li>Check: bucket sizes (frequency fields)</li>
+                        <li>Review: spend distribution (bucket spend fields)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="success-box">
+                    <h3 style="margin-top: 0;">3. Monitor Editor Concentration</h3>
+                    <ul>
+                        <li>Filter: editor_share_in_fp ≥ 0.70</li>
+                        <li>Review: which editors dominate which buckets</li>
+                        <li>Action: Redistribute briefs to other editors</li>
+                    </ul>
+                </div>
+
+                <div class="success-box">
+                    <h3 style="margin-top: 0;">4. Find Scale Opportunities</h3>
+                    <ul>
+                        <li>Filter: action_flag = 'SCALE_PROMISING_UNIQUE'</li>
+                        <li>Sort by: ROAS DESC</li>
+                        <li>Action: Increase budgets on high-ROAS unique creatives</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="warning-box" style="margin-top: 20px;">
+            <strong>⚠️ Remember:</strong> These scores measure <strong>diversity health</strong>, not creative performance. A low diversity score with high ROAS might justify duplication — the system flags risks so you can make informed decisions.
+        </div>
+    </div>
+</body>
+</html>
